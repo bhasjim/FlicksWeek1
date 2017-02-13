@@ -17,10 +17,13 @@ class MovieCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
+        let fontSize: CGFloat = selected ? 34.0 : 17.0
+        self.titleLabel?.font = self.textLabel?.font.withSize(fontSize)
+        
         // Configure the view for the selected state
     }
 

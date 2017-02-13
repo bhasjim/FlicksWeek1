@@ -16,6 +16,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        window = UIWindow(frame: UIScreen.main.bounds)
+        let storyBoard = UIStoryboard(name: "Main", bundle: nil);
+        
+        //for NowPlaying
+        let nowPlayingNavigationController = storyBoard.instantiateViewController(withIdentifier: "MoviesNavController") as! UINavigationController; //gets the navigation controller
+        let nowPlayingViewController = nowPlayingNavigationController.topViewController as! MoviesViewController; //gets the view controller
+        nowPlayingViewController.endPoint = "now_playing";
+        nowPlayingNavigationController.tabBarItem.title = "Now Playing"
+        nowPlayingNavigationController.tabBarItem.image = UIImage(named: "ticket");
+        
+        //for Top Rated
+        let topRatedNavigationController = storyBoard.instantiateViewController(withIdentifier: "MoviesNavController") as! UINavigationController; //gets the navigation controller
+        let topRatedViewController = topRatedNavigationController.topViewController as! MoviesViewController; //gets the view controller
+        topRatedViewController.endPoint = "top_rated";
+        topRatedNavigationController.tabBarItem.title = "Top Rated";
+        topRatedNavigationController.tabBarItem.image = UIImage(named: "star");
+        
+        //makes the tab bar with the array of the nav controllers
+        let tabBarController = UITabBarController();
+        tabBarController.viewControllers = [nowPlayingNavigationController, topRatedNavigationController];
+        
+        //sets initial view controller to the tab bar
+        window?.rootViewController = tabBarController;
+        window?.makeKeyAndVisible();
+        
         return true
     }
 
